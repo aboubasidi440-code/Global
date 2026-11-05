@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import Logo from './Logo';
 import { href, translator, type Locale } from '@/lib/i18n';
+import { useSettings } from '@/lib/data';
 
 const NAV = [
   { key: 'nav.home', path: '' },
@@ -15,6 +16,12 @@ const NAV = [
   { key: 'nav.contact', path: '/contact' },
 ];
 
+const FALLBACK = {
+  email: 'info@globalsolutions.one',
+  phone: '00227 99 54 83 49',
+  city: 'Niamey, Niger',
+};
+
 function otherLocalePath(pathname: string, locale: Locale) {
   const target = locale === 'fr' ? 'en' : 'fr';
   const parts = pathname.split('/');
@@ -22,14 +29,40 @@ function otherLocalePath(pathname: string, locale: Locale) {
   return parts.join('/') || `/${target}`;
 }
 
+type ContactSettings = {
+  email_primary?: string;
+  phone_primary?: string;
+};
+
 export default function SiteHeader({ locale }: { locale: Locale }) {
   const t = translator(locale);
   const pathname = usePathname() || '';
   const [open, setOpen] = useState(false);
   const currentPath = pathname.replace(`/${locale}`, '') || '';
+  const { data } = useSettings();
+  const contact = (data?.contact ?? {}) as ContactSettings;
+
+  const email = contact.email_primary || FALLBACK.email;
+  const phone = contact.phone_primary || FALLBACK.phone;
 
   return (
-    <header className="site-header" data-open={open}>
+    <>
+      <div className="topbar">
+        <div className="shell topbar-inner">
+          <div className="topbar-contacts">
+            <a href={`mailto:${email}`}>{email}</a>
+            <span className="divider" aria-hidden="true" />
+            <a href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a>
+          </div>
+          <div className="topbar-contacts">
+            <span>{FALLBACK.city}</span>
+            <span className="divider" aria-hidden="true" />
+            <span>{locale === 'en' ? 'Mon–Fri · 8am–5pm' : 'Lun–Ven · 8h–17h'}</span>
+          </div>
+        </div>
+      </div>
+
+      <header className="site-header" data-open={open}>
         <div className="shell site-header-inner">
           <Link href={href(locale)} className="brand" onClick={() => setOpen(false)}>
             <Logo />
@@ -63,8 +96,8 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
                 EN
               </Link>
             </div>
-            <Link href={href(locale, '/contact')} className="btn btn-sm">
-              {t('cta.contact')}
+            <Link href={href(locale, '/contact')} className="btn btn-accent btn-sm">
+              {t('cta.quote')}
             </Link>
             <button
               type="button"
@@ -77,6 +110,7 @@ export default function SiteHeader({ locale }: { locale: Locale }) {
             </button>
           </div>
         </div>
-    </header>
+      </header>
+    </>
   );
 }

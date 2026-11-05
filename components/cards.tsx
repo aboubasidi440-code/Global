@@ -49,12 +49,12 @@ export function TeamCard({ member, locale }: { member: TeamMember; locale: Local
 
   return (
     <article className="team-card reveal">
-      <div className="team-photo">
+      <div className={photo ? 'team-photo' : 'team-photo team-photo--empty'}>
         {photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={photo} alt={member.name} loading="lazy" />
         ) : (
-          <span>{initials(member.name)}</span>
+          <span className="monogram">{initials(member.name)}</span>
         )}
       </div>
       <div className="card-body">
