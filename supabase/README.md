@@ -46,6 +46,7 @@ Réponses : `200 {ok:true}`, `400` champs invalides, `413` fichier trop lourd, `
   "email_primary": "info@globalsolutions.one",
   "email_secondary": "",
   "notification_email": "globalsolution877@gmail.com",
+  "notification_from": "",
   "phone_primary": "+227 90 39 31 32",
   "phone_secondary": "+227 98 33 61 91",
   "whatsapp": "22790393132",

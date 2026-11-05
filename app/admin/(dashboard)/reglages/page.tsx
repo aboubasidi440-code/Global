@@ -35,6 +35,11 @@ const CONTACT_FIELDS: { name: string; label: string; long?: boolean; hint?: stri
     label: 'Adresse qui reçoit les messages du formulaire',
     hint: 'Notification e-mail des demandes de contact',
   },
+  {
+    name: 'notification_from',
+    label: 'Expéditeur des notifications',
+    hint: 'Format « Global Solutions <adresse@domaine> ». Laisser vide pour utiliser l’expéditeur par défaut.',
+  },
 ];
 
 export default function AdminSettingsPage() {

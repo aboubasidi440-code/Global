@@ -13,11 +13,13 @@ const respond = (status: number, body: Record<string, unknown>) =>
   new Response(JSON.stringify(body), { status, headers: cors });
 
 const DEFAULT_NOTIFICATION_EMAIL = 'globalsolution877@gmail.com';
+// Expéditeur de repli : fonctionne sans domaine vérifié, mais uniquement vers l'adresse du compte Resend.
+const DEFAULT_NOTIFICATION_FROM = 'Global Solutions <onboarding@resend.dev>';
 
 type ContactSettings = {
   notification_email?: string;
+  notification_from?: string;
   email_primary?: string;
-  phone_primary?: string;
 };
 
 Deno.serve(async (req: Request) => {
@@ -88,21 +90,23 @@ Deno.serve(async (req: Request) => {
     }
     const row = (await saved.json())[0];
 
-    // Adresse de réception : site_settings.contact.notification_email, sinon repli.
+    // Adresse de réception et expéditeur : site_settings.contact, sinon valeurs de repli.
     let recipient = DEFAULT_NOTIFICATION_EMAIL;
+    let sender = Deno.env.get('NOTIFICATION_FROM') || DEFAULT_NOTIFICATION_FROM;
     try {
       const settingsRes = await fetch(base + '/rest/v1/site_settings?key=eq.contact&select=value', { headers: auth });
       if (settingsRes.ok) {
         const settings = (await settingsRes.json())?.[0]?.value as ContactSettings | undefined;
         const configured = String(settings?.notification_email || settings?.email_primary || '').trim();
         if (/^\S+@\S+\.\S+$/.test(configured)) recipient = configured;
+        const configuredFrom = String(settings?.notification_from || '').trim();
+        if (configuredFrom) sender = configuredFrom;
       }
-    } catch { /* on garde l'adresse de repli */ }
+    } catch { /* on garde les valeurs de repli */ }
 
-    const resendKey = Deno.env.get('RESEND_API_KEY'), from = Deno.env.get('NOTIFICATION_FROM');
+    const resendKey = Deno.env.get('RESEND_API_KEY'), from = sender;
     let status = 'failed', detail = '';
     if (!resendKey) detail = 'RESEND_API_KEY manquante';
-    else if (!from) detail = 'NOTIFICATION_FROM manquante';
     else {
       try {
         const lines = [

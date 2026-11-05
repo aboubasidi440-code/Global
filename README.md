@@ -48,10 +48,16 @@ Les demandes sont enregistrées dans `public.contact_requests` puis notifiées p
 `site_settings.contact.notification_email` — aujourd’hui **globalsolution877@gmail.com** (repli codé dans
 la fonction : même adresse). L’adresse affichée sur le site reste `info@globalsolutions.one`.
 
-L’envoi passe par [Resend](https://resend.com) et nécessite deux secrets sur la fonction `contact-submit` :
+L’envoi passe par [Resend](https://resend.com). La clé API est stockée dans le secret `RESEND_API_KEY`
+de la fonction `contact-submit` (déjà configuré). L’expéditeur se règle, dans cet ordre de priorité :
 
-- `RESEND_API_KEY` — clé API Resend ;
-- `NOTIFICATION_FROM` — expéditeur vérifié, ex. `Global Solutions <notifications@globalsolutions.one>`.
+1. champ `notification_from` des réglages du site (`/admin/reglages`) ;
+2. secret `NOTIFICATION_FROM` de la fonction ;
+3. valeur de repli `Global Solutions <onboarding@resend.dev>` (utilisable sans domaine vérifié, mais
+   uniquement vers l’adresse du compte Resend).
+
+Pour envoyer depuis `@globalsolutions.one`, vérifier le domaine dans Resend puis renseigner par exemple
+`Global Solutions <notifications@globalsolutions.one>`.
 
 Sans ces secrets, la demande reste enregistrée et visible dans l’administration ; `notification_status`
 passe à `failed` et `notification_error` indique la cause.
