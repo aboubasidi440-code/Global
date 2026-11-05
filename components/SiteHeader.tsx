@@ -8,10 +8,10 @@ import { href, translator, type Locale } from '@/lib/i18n';
 
 const NAV = [
   { key: 'nav.home', path: '' },
+  { key: 'nav.about', path: '/a-propos' },
   { key: 'nav.projects', path: '/projets' },
   { key: 'nav.team', path: '/equipe' },
   { key: 'nav.news', path: '/actualites' },
-  { key: 'nav.documents', path: '/documents' },
   { key: 'nav.contact', path: '/contact' },
 ];
 

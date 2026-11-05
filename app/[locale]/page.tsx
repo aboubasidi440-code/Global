@@ -88,7 +88,7 @@ export default function HomePage() {
       </section>
 
       {/* ---------------- image d'ouverture ---------------- */}
-      <figure className="feature" style={{ margin: 0 }}>
+      <figure className="feature reveal" style={{ margin: 0 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/hero-chantier.jpg" alt={t('home.feature.caption_title')} />
         <figcaption className="feature-caption">
@@ -134,7 +134,7 @@ export default function HomePage() {
 
           <div className="activities-grid">
             {activities.map((item, index) => (
-              <article className="activity" key={item.slug}>
+              <article className="activity reveal" key={item.slug}>
                 <div className="activity-media">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -176,7 +176,7 @@ export default function HomePage() {
           ) : (
             <div className="domains-mosaic">
               {DOMAIN_IMAGES.map((domain) => (
-                <figure className="domain-tile" key={domain.src}>
+                <figure className="domain-tile reveal" key={domain.src}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={domain.src} alt={locale === 'en' ? domain.en : domain.fr} loading="lazy" />
                   <figcaption>{locale === 'en' ? domain.en : domain.fr}</figcaption>

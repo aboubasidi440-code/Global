@@ -13,6 +13,7 @@ const fr: Dict = {
   'brand.tagline': 'Génie civil · Hydraulique · Énergie',
 
   'nav.home': 'Accueil',
+  'nav.about': 'À propos',
   'nav.projects': 'Projets',
   'nav.team': 'Équipe',
   'nav.news': 'Actualités',
@@ -156,6 +157,7 @@ const en: Dict = {
   'brand.tagline': 'Civil engineering · Water · Energy',
 
   'nav.home': 'Home',
+  'nav.about': 'About',
   'nav.projects': 'Projects',
   'nav.team': 'Team',
   'nav.news': 'News',

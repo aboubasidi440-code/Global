@@ -16,7 +16,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
   const category = bilingual(project, 'category', locale);
 
   return (
-    <Link href={href(locale, `/projets/${project.id}`)} className="project-card">
+    <Link href={href(locale, `/projets/${project.id}`)} className="project-card reveal">
       <div className="project-media">
         {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -48,7 +48,7 @@ export function TeamCard({ member, locale }: { member: TeamMember; locale: Local
   const bio = bilingual(member, 'bio', locale);
 
   return (
-    <article className="team-card">
+    <article className="team-card reveal">
       <div className="team-photo">
         {photo ? (
           // eslint-disable-next-line @next/next/no-img-element
