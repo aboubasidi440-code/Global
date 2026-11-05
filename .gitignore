@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+build
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# variables locales (la clé publishable n'est pas un secret, mais on garde .env.local hors dépôt)
+.env.local
+.env*.local
