@@ -53,11 +53,26 @@ de la fonction `contact-submit` (déjà configuré). L’expéditeur se règle, 
 
 1. champ `notification_from` des réglages du site (`/admin/reglages`) ;
 2. secret `NOTIFICATION_FROM` de la fonction ;
-3. valeur de repli `Global Solutions <onboarding@resend.dev>` (utilisable sans domaine vérifié, mais
-   uniquement vers l’adresse du compte Resend).
+3. valeur de repli `Global Solutions <onboarding@resend.dev>`.
 
-Pour envoyer depuis `@globalsolutions.one`, vérifier le domaine dans Resend puis renseigner par exemple
-`Global Solutions <notifications@globalsolutions.one>`.
+### Limite actuelle de Resend (constatée lors des tests)
+
+Domaine `globalsolutions.one` **non vérifié** dans Resend, et compte Resend ouvert avec
+`aboubasidi440@gmail.com`. Dans cet état :
+
+- envoi depuis `…@mail.globalsolutions.one` → `403 domain is not verified` ;
+- envoi depuis `onboarding@resend.dev` vers `globalsolution877@gmail.com` →
+  `403 You can only send testing emails to your own email address (aboubasidi440@gmail.com)`.
+
+Deux solutions, au choix :
+
+1. **Vérifier le domaine** `globalsolutions.one` dans Resend (enregistrements DNS SPF/DKIM), puis mettre
+   `Global Solutions <notifications@globalsolutions.one>` dans `/admin/reglages` — recommandé ;
+2. **Changer l’e-mail du compte Resend** pour `globalsolution877@gmail.com` (aucun DNS à toucher) : les
+   envois depuis `onboarding@resend.dev` arrivent alors dans cette boîte.
+
+Tant que l’un des deux n’est pas fait, les demandes restent enregistrées dans l’administration et le
+statut « échec » indique précisément la cause.
 
 Sans ces secrets, la demande reste enregistrée et visible dans l’administration ; `notification_status`
 passe à `failed` et `notification_error` indique la cause.

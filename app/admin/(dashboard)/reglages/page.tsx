@@ -38,7 +38,9 @@ const CONTACT_FIELDS: { name: string; label: string; long?: boolean; hint?: stri
   {
     name: 'notification_from',
     label: 'Expéditeur des notifications',
-    hint: 'Format « Global Solutions <adresse@domaine> ». Laisser vide pour utiliser l’expéditeur par défaut.',
+    hint:
+      'Format « Global Solutions <adresse@domaine> ». Tant que le domaine n’est pas vérifié chez Resend, seul ' +
+      'l’expéditeur onboarding@resend.dev fonctionne — et uniquement vers l’adresse du compte Resend.',
   },
 ];
 
