@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from './Logo';
 import { href, translator, type Locale } from '@/lib/i18n';
 import { useSettings } from '@/lib/data';
 import { whatsappLink } from '@/lib/format';
@@ -27,13 +28,13 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
         <div className="footer-grid">
           <div>
             <span className="brand">
-              <span className="brand-mark">GS</span>
+              <Logo size={40} />
               <span>
-                {t('brand.name')}
-                <small>{t('brand.tagline')}</small>
+                <span className="brand-name">{t('brand.name')}</span>
+                <span className="brand-sub">BTP · Hydraulique · Énergie</span>
               </span>
             </span>
-            <p style={{ marginTop: '1.2rem', maxWidth: '38ch', fontSize: '0.9rem' }}>{t('footer.about')}</p>
+            <p className="footer-about">{t('footer.about')}</p>
           </div>
 
           <div>
@@ -89,7 +90,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
 
         <div className="footer-bottom">
           <span>
-            © {year} {t('brand.name')}. {t('footer.rights')}
+            © {year} {t('brand.name')} — {t('footer.rights')}
           </span>
           <span>
             <Link href="/admin">{t('footer.admin')}</Link>

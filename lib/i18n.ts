@@ -34,6 +34,13 @@ const fr: Dict = {
   'cta.view_all': 'Tout voir',
 
   'home.eyebrow': 'Niger · Depuis {year}',
+  'services.label': 'Nos services',
+  'home.card.title': 'Contact direct',
+  'home.card.write': 'Écrire',
+  'home.gallery.title': 'Nos chantiers en images',
+  'home.gallery.subtitle':
+    'Quelques chantiers représentatifs de nos métiers. Les fiches projets détaillées seront publiées prochainement.',
+
   'home.expertise.title': 'Nos domaines d’intervention',
   'home.expertise.subtitle':
     'Six expertises complémentaires, mobilisées ensemble sur chaque projet — de l’étude de faisabilité à la réception des ouvrages.',
@@ -163,6 +170,13 @@ const en: Dict = {
   'cta.view_all': 'View all',
 
   'home.eyebrow': 'Niger · Since {year}',
+  'services.label': 'Our services',
+  'home.card.title': 'Direct contact',
+  'home.card.write': 'Write',
+  'home.gallery.title': 'Our work in pictures',
+  'home.gallery.subtitle':
+    'A few sites representative of our trades. Detailed case studies will be published shortly.',
+
   'home.expertise.title': 'What we do',
   'home.expertise.subtitle':
     'Six complementary disciplines, combined on every project — from feasibility studies to handover.',
