@@ -21,6 +21,9 @@ export default async function LocaleLayout({
   return (
     <>
       <LocaleLang locale={locale} />
+      <a className="skip-link" href="#contenu">
+        {locale === 'en' ? 'Skip to content' : 'Aller au contenu'}
+      </a>
       <SiteHeader locale={locale} />
       <main id="contenu">{children}</main>
       <SiteFooter locale={locale} />

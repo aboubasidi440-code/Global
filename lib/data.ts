@@ -202,14 +202,16 @@ export function useDocuments() {
 export function useSettings() {
   return useQuery<Record<string, Settings>>(
     {},
-    (client) =>
-      client
-        .from('site_settings')
-        .select('key,value,published')
-        .eq('published', true) as unknown as Promise<{
-        data: Record<string, Settings> | null;
-        error: { message: string } | null;
-      }>,
+    async (client) => {
+      const { data, error } = await client.from('site_settings').select('key,value').eq('published', true);
+      if (error) return { data: null, error };
+      const map: Record<string, Settings> = {};
+      (data ?? []).forEach((row) => {
+        const { key, value } = row as { key: string; value: Settings };
+        map[key] = value;
+      });
+      return { data: map, error: null };
+    },
     [],
   );
 }

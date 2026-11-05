@@ -66,14 +66,17 @@ passe à `failed` et `notification_error` indique la cause.
 
 ```
 app/
-  [locale]/            pages publiques FR/EN
-  admin/login/         connexion
-  admin/(dashboard)/   tableau de bord, contenus, messages, réglages
-components/            header, footer, cartes, formulaire, éditeurs d’administration
-lib/                   i18n, accès Supabase, hooks de données, médias, auth
+  [locale]/                     pages publiques FR/EN (+ métadonnées par page)
+  admin/login/                  connexion
+  admin/(dashboard)/            tableau de bord, contenus, messages, réglages
+  sitemap.ts, robots.ts         référencement
+  icon.svg, not-found.tsx       favicon et page 404
+components/                     header, footer, cartes, formulaire, éditeurs d’administration
+lib/                            i18n, accès Supabase, hooks de données, médias, auth
 supabase/
-  functions/contact-submit/   fonction edge de réception des demandes
-  README.md                   schéma de données et politiques RLS
+  functions/contact-submit/             fonction edge de réception des demandes
+  migrations/0001_schema_baseline.sql   schéma complet (tables, RLS, stockage, réglages)
+  README.md                             documentation du schéma et des politiques RLS
 ```
 
 ## Déploiement
