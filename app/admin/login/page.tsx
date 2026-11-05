@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { useStaffSession } from '@/lib/auth';
+import Logo from '@/components/Logo';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,10 +36,10 @@ export default function LoginPage() {
     <div className="login-wrap">
       <form className="login-card" onSubmit={handleSubmit}>
         <span className="brand">
-          <span className="brand-mark">GS</span>
+          <Logo size={40} />
           <span>
-            Global Solutions
-            <small>Administration</small>
+            <span className="brand-name">Global Solutions</span>
+            <span className="brand-sub">Administration</span>
           </span>
         </span>
         <div>

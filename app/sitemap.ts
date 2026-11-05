@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://globalsolutions.one';
 
-const PATHS = ['', '/projets', '/equipe', '/actualites', '/documents', '/contact'];
+const PATHS = ['', '/a-propos', '/projets', '/equipe', '/actualites', '/documents', '/contact'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

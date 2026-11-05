@@ -62,7 +62,7 @@ export default function ProjectsPage() {
               {t('common.error')} ({error})
             </p>
           ) : visible.length ? (
-            <div className="projects-grid">
+            <div className="projects-grid projects-grid--wide">
               {visible.map((project) => (
                 <ProjectCard key={project.id} project={project} locale={locale} />
               ))}

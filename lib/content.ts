@@ -82,3 +82,19 @@ export const APPROACH = [
   { key: 'approach.item3', icon: '③' },
   { key: 'approach.item4', icon: '④' },
 ] as const;
+
+export const SERVICES_BAND = [
+  { fr: 'BTP', en: 'Construction' },
+  { fr: 'Hydraulique', en: 'Water' },
+  { fr: 'Forages', en: 'Boreholes' },
+  { fr: 'Énergie solaire', en: 'Solar energy' },
+  { fr: 'Études', en: 'Design' },
+  { fr: 'Suivi de chantier', en: 'Supervision' },
+];
+
+/** Visuels de démonstration utilisés quand aucun projet publié n'est disponible. */
+export const DOMAIN_IMAGES = [
+  { src: '/images/projet-batiment.jpg', fr: 'Génie civil & bâtiment', en: 'Civil engineering & buildings' },
+  { src: '/images/projet-hydraulique.jpg', fr: 'Hydraulique & AEP', en: 'Water supply' },
+  { src: '/images/projet-solaire.jpg', fr: 'Énergie & solaire', en: 'Energy & solar' },
+];

@@ -13,6 +13,7 @@ const fr: Dict = {
   'brand.tagline': 'Génie civil · Hydraulique · Énergie',
 
   'nav.home': 'Accueil',
+  'nav.about': 'À propos',
   'nav.projects': 'Projets',
   'nav.team': 'Équipe',
   'nav.news': 'Actualités',
@@ -34,6 +35,20 @@ const fr: Dict = {
   'cta.view_all': 'Tout voir',
 
   'home.eyebrow': 'Niger · Depuis {year}',
+  'home.activities.label': 'Nos activités',
+  'home.feature.caption_title': 'Chantier de Niamey',
+  'home.feature.caption_text': 'Structure en béton armé — suivi d’exécution',
+  'home.meta.1': 'Bureau d’études & maîtrise d’œuvre',
+  'home.meta.2': 'Niamey, Niger',
+  'home.scroll': 'Découvrir',
+
+  'services.label': 'Nos services',
+  'home.card.title': 'Contact direct',
+  'home.card.write': 'Écrire',
+  'home.gallery.title': 'Nos chantiers en images',
+  'home.gallery.subtitle':
+    'Quelques chantiers représentatifs de nos métiers. Les fiches projets détaillées seront publiées prochainement.',
+
   'home.expertise.title': 'Nos domaines d’intervention',
   'home.expertise.subtitle':
     'Six expertises complémentaires, mobilisées ensemble sur chaque projet — de l’étude de faisabilité à la réception des ouvrages.',
@@ -142,6 +157,7 @@ const en: Dict = {
   'brand.tagline': 'Civil engineering · Water · Energy',
 
   'nav.home': 'Home',
+  'nav.about': 'About',
   'nav.projects': 'Projects',
   'nav.team': 'Team',
   'nav.news': 'News',
@@ -163,6 +179,20 @@ const en: Dict = {
   'cta.view_all': 'View all',
 
   'home.eyebrow': 'Niger · Since {year}',
+  'home.activities.label': 'What we do',
+  'home.feature.caption_title': 'Site in Niamey',
+  'home.feature.caption_text': 'Reinforced concrete structure — works supervision',
+  'home.meta.1': 'Design office & construction management',
+  'home.meta.2': 'Niamey, Niger',
+  'home.scroll': 'Discover',
+
+  'services.label': 'Our services',
+  'home.card.title': 'Direct contact',
+  'home.card.write': 'Write',
+  'home.gallery.title': 'Our work in pictures',
+  'home.gallery.subtitle':
+    'A few sites representative of our trades. Detailed case studies will be published shortly.',
+
   'home.expertise.title': 'What we do',
   'home.expertise.subtitle':
     'Six complementary disciplines, combined on every project — from feasibility studies to handover.',

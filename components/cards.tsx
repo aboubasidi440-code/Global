@@ -16,7 +16,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
   const category = bilingual(project, 'category', locale);
 
   return (
-    <Link href={href(locale, `/projets/${project.id}`)} className="project-card">
+    <Link href={href(locale, `/projets/${project.id}`)} className="project-card reveal">
       <div className="project-media">
         {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -32,9 +32,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
           {project.year ? <span>{project.year}</span> : null}
         </div>
         <h3>{title}</h3>
-        <p style={{ color: 'var(--ink-soft)', fontSize: '0.92rem' }}>
-          {excerpt(bilingual(project, 'description', locale), 130)}
-        </p>
+        <p>{excerpt(bilingual(project, 'description', locale), 120)}</p>
         <span className="link-arrow">
           {t('cta.read')} <ArrowRight />
         </span>
@@ -50,7 +48,7 @@ export function TeamCard({ member, locale }: { member: TeamMember; locale: Local
   const bio = bilingual(member, 'bio', locale);
 
   return (
-    <article className="team-card">
+    <article className="team-card reveal">
       <div className="team-photo">
         {photo ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -59,11 +57,11 @@ export function TeamCard({ member, locale }: { member: TeamMember; locale: Local
           <span>{initials(member.name)}</span>
         )}
       </div>
-      <div>
+      <div className="card-body">
         {position ? <span className="role">{position}</span> : null}
-        <h3 style={{ marginTop: '0.35rem' }}>{member.name}</h3>
+        <h3>{member.name}</h3>
+        {bio ? <p>{bio}</p> : null}
       </div>
-      {bio ? <p>{bio}</p> : null}
     </article>
   );
 }

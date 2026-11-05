@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { signOut, useStaffSession } from '@/lib/auth';
+import Logo from '@/components/Logo';
 
 const NAV = [
   { href: '/admin', label: 'Tableau de bord' },
@@ -55,10 +56,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="admin-shell">
       <aside className="admin-sidebar">
         <Link href="/admin" className="brand">
-          <span className="brand-mark">GS</span>
+          <Logo size={36} />
           <span>
-            Global Solutions
-            <small>Administration</small>
+            <span className="brand-name">Global Solutions</span>
+            <span className="brand-sub">Administration</span>
           </span>
         </Link>
 
