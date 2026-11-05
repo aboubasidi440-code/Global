@@ -15,12 +15,22 @@ type ContactSettings = {
   whatsapp?: string;
 };
 
+const GALLERY = [
+  '/images/projet-batiment.jpg',
+  '/images/chateau-eau.jpg',
+  '/images/chantier-forage.jpg',
+  '/images/projet-solaire.jpg',
+  '/images/chantier-voirie.jpg',
+  '/images/projet-hydraulique.jpg',
+];
+
 export default function SiteFooter({ locale }: { locale: Locale }) {
   const t = translator(locale);
   const { data } = useSettings();
   const contact = (data?.contact ?? {}) as ContactSettings;
   const year = new Date().getFullYear();
   const wa = whatsappLink(contact.whatsapp);
+  const en = locale === 'en';
 
   return (
     <footer className="site-footer">
@@ -28,18 +38,28 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
         <div className="footer-grid">
           <div>
             <span className="brand">
-              <Logo size={40} />
+              <Logo size={44} />
               <span>
                 <span className="brand-name">{t('brand.name')}</span>
                 <span className="brand-sub">BTP · Hydraulique · Énergie</span>
               </span>
             </span>
             <p className="footer-about">{t('footer.about')}</p>
+
+            <div className="footer-gallery">
+              {GALLERY.map((src) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={src} alt="" key={src} loading="lazy" />
+              ))}
+            </div>
           </div>
 
           <div>
             <h4>{t('footer.navigation')}</h4>
             <ul>
+              <li>
+                <Link href={href(locale, '/a-propos')}>{t('nav.about')}</Link>
+              </li>
               <li>
                 <Link href={href(locale, '/projets')}>{t('nav.projects')}</Link>
               </li>
@@ -52,8 +72,26 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
               <li>
                 <Link href={href(locale, '/documents')}>{t('nav.documents')}</Link>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>{en ? 'Our services' : 'Nos expertises'}</h4>
+            <ul>
               <li>
-                <Link href={href(locale, '/contact')}>{t('nav.contact')}</Link>
+                <Link href={href(locale, '/projets')}>{en ? 'Buildings' : 'Bâtiment'}</Link>
+              </li>
+              <li>
+                <Link href={href(locale, '/projets')}>{en ? 'Civil engineering' : 'Génie civil'}</Link>
+              </li>
+              <li>
+                <Link href={href(locale, '/projets')}>{en ? 'Water supply' : 'Hydraulique & AEP'}</Link>
+              </li>
+              <li>
+                <Link href={href(locale, '/projets')}>{en ? 'Boreholes' : 'Forages'}</Link>
+              </li>
+              <li>
+                <Link href={href(locale, '/projets')}>{en ? 'Solar energy' : 'Énergie solaire'}</Link>
               </li>
             </ul>
           </div>
@@ -72,6 +110,11 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
                   <a href={`tel:${contact.phone_primary.replace(/\s/g, '')}`}>{contact.phone_primary}</a>
                 </li>
               ) : null}
+              {contact.phone_secondary ? (
+                <li>
+                  <a href={`tel:${contact.phone_secondary.replace(/\s/g, '')}`}>{contact.phone_secondary}</a>
+                </li>
+              ) : null}
               {contact.email_primary ? (
                 <li>
                   <a href={`mailto:${contact.email_primary}`}>{contact.email_primary}</a>
@@ -85,6 +128,9 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
                 </li>
               ) : null}
             </ul>
+            <Link href={href(locale, '/contact')} className="btn btn-accent btn-sm" style={{ marginTop: '1.2rem' }}>
+              {t('cta.quote')}
+            </Link>
           </div>
         </div>
 

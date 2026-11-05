@@ -24,6 +24,7 @@ const fr: Dict = {
   'nav.close': 'Fermer',
 
   'cta.contact': 'Nous contacter',
+  'cta.quote': 'Demander un devis',
   'cta.discover': 'Découvrir nos projets',
   'cta.all_projects': 'Tous les projets',
   'cta.all_news': 'Toutes les actualités',
@@ -172,6 +173,7 @@ const en: Dict = {
   'nav.close': 'Close',
 
   'cta.contact': 'Get in touch',
+  'cta.quote': 'Request a quote',
   'cta.discover': 'Explore our projects',
   'cta.all_projects': 'All projects',
   'cta.all_news': 'All news',

@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="12" fill="#0f3b32"/>
-  <circle cx="32" cy="32" r="21" fill="none" stroke="#f7f2e8" stroke-width="1.4" opacity="0.55"/>
-  <text x="32" y="38" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="20" fill="#f7f2e8" letter-spacing="1">GS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Global Solutions">
+  <rect width="64" height="64" rx="14" fill="#0b1b26"/>
+  <polygon points="32,9 51,20 51,44 32,55 13,44 13,20" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-opacity="0.55" stroke-linejoin="round"/>
+  <circle cx="32" cy="32" r="10.5" fill="#2f86c4"/>
+  <ellipse cx="32" cy="32" rx="4.6" ry="10.5" fill="none" stroke="#dcecfa" stroke-width="1.1" stroke-opacity="0.9"/>
+  <path d="M21.5 32h21M23 26.4h18M23 37.6h18" stroke="#dcecfa" stroke-width="1" stroke-opacity="0.75"/>
 </svg>
