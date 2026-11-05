@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import Icon, { ArrowRight } from '@/components/Icon';
+import { ArrowRight } from '@/components/Icon';
 import { ProjectCard, TeamCard } from '@/components/cards';
 import { APPROACH, DOMAIN_IMAGES, EXPERTISE } from '@/lib/content';
 import { usePublishedProjects, useSettings, useTeam } from '@/lib/data';
@@ -20,6 +20,13 @@ type Homepage = {
   subtitle?: string;
   subtitle_en?: string;
 };
+
+const ACTIVITY_IMAGES = [
+  '/images/projet-batiment.jpg',
+  '/images/projet-hydraulique.jpg',
+  '/images/projet-solaire.jpg',
+  '/images/hero-clair.jpg',
+];
 
 export default function HomePage() {
   const params = useParams<{ locale: string }>();
@@ -42,10 +49,11 @@ export default function HomePage() {
   const featured = projects.filter((project) => project.featured).slice(0, 3);
   const list = (featured.length ? featured : projects).slice(0, 3);
   const teamPreview = team.slice(0, 4);
+  const activities = EXPERTISE.slice(0, 4);
 
   return (
     <>
-      {/* ---------------- hero ---------------- */}
+      {/* ---------------- déclaration ---------------- */}
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-copy">
@@ -54,6 +62,9 @@ export default function HomePage() {
               <span className="line">{text('headline_first', 'Construire aujourd’hui.')}</span>
               <span className="highlight">{text('headline_second', 'Servir demain.')}</span>
             </h1>
+          </div>
+
+          <div className="hero-side">
             <p className="lead">
               {text(
                 'subtitle',
@@ -61,24 +72,33 @@ export default function HomePage() {
               )}
             </p>
             <div className="hero-actions">
-              <Link href={href(locale, '/contact')} className="btn">
-                {t('cta.contact')}
-              </Link>
               <Link href={href(locale, '/projets')} className="link-arrow">
                 {t('cta.discover')} <ArrowRight />
               </Link>
+              <Link href={href(locale, '/contact')} className="btn btn-ghost">
+                {t('cta.contact')}
+              </Link>
             </div>
-          </div>
-
-          <div className="hero-media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/hero-clair.jpg" alt={locale === 'en' ? 'Engineers reviewing plans on site' : 'Ingénieurs sur un chantier'} />
+            <div className="hero-meta">
+              <span>{t('home.meta.1')}</span>
+              <span>{t('home.meta.2')}</span>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* ---------------- image d'ouverture ---------------- */}
+      <figure className="feature" style={{ margin: 0 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/hero-chantier.jpg" alt={t('home.feature.caption_title')} />
+        <figcaption className="feature-caption">
+          <strong>{t('home.feature.caption_title')}</strong>
+          <span>{t('home.feature.caption_text')}</span>
+        </figcaption>
+      </figure>
+
       {/* ---------------- chiffres ---------------- */}
-      <section className="stats">
+      <section className="stats" style={{ marginTop: 'clamp(3rem, 5vw, 4.5rem)' }}>
         <div className="shell stats-grid">
           <div className="stat">
             <strong>{year}</strong>
@@ -99,21 +119,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- expertise ---------------- */}
-      <section className="section expertise" id="expertises">
+      {/* ---------------- activités ---------------- */}
+      <section className="activities" id="expertises">
         <div className="shell">
-          <div className="section-head">
-            <span className="eyebrow">{locale === 'en' ? 'Expertise' : 'Expertise'}</span>
-            <h2>{t('home.expertise.title')}</h2>
-            <p className="lead">{t('home.expertise.subtitle')}</p>
+          <div className="activities-head">
+            <div>
+              <span className="eyebrow">{t('home.activities.label')}</span>
+              <h2 style={{ marginTop: '0.8rem' }}>{t('home.expertise.title')}</h2>
+            </div>
+            <Link href={href(locale, '/projets')} className="link-arrow">
+              {t('cta.all_projects')} <ArrowRight />
+            </Link>
           </div>
-          <div className="expertise-grid">
-            {EXPERTISE.map((item, index) => (
-              <article className="expertise-card" key={item.slug}>
-                <span className="expertise-num">{String(index + 1).padStart(2, '0')}</span>
-                <span className="expertise-icon">
-                  <Icon name={item.icon} size={22} />
-                </span>
+
+          <div className="activities-grid">
+            {activities.map((item, index) => (
+              <article className="activity" key={item.slug}>
+                <div className="activity-media">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={ACTIVITY_IMAGES[index] ?? '/images/hero-chantier.jpg'}
+                    alt={locale === 'en' ? item.titleEn : item.title}
+                    loading="lazy"
+                  />
+                </div>
+                <span className="index">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{locale === 'en' ? item.titleEn : item.title}</h3>
                 <p>{locale === 'en' ? item.textEn : item.text}</p>
               </article>
@@ -123,15 +153,12 @@ export default function HomePage() {
       </section>
 
       {/* ---------------- réalisations ---------------- */}
-      <section className="section projects-section">
+      <section className="projects-section" style={{ borderTop: '1px solid var(--line)' }}>
         <div className="shell">
-          <div
-            className="section-head"
-            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', maxWidth: 'none', gap: '2rem', flexWrap: 'wrap' }}
-          >
+          <div className="activities-head">
             <div>
               <span className="eyebrow">{t('home.projects.title')}</span>
-              <h2 style={{ marginTop: '0.7rem' }}>{t('home.projects.title')}</h2>
+              <h2 style={{ marginTop: '0.8rem' }}>{t('home.projects.title')}</h2>
             </div>
             <Link href={href(locale, '/projets')} className="link-arrow">
               {t('cta.all_projects')} <ArrowRight />
@@ -161,12 +188,16 @@ export default function HomePage() {
       </section>
 
       {/* ---------------- approche ---------------- */}
-      <section className="section approach">
+      <section className="approach" style={{ borderTop: '1px solid var(--line)', padding: 'clamp(4rem, 7vw, 6rem) 0' }}>
         <div className="shell">
-          <div className="section-head">
-            <span className="eyebrow">{t('home.approach.title')}</span>
-            <h2>{t('home.approach.title')}</h2>
-            <p className="lead">{t('home.approach.subtitle')}</p>
+          <div className="activities-head">
+            <div>
+              <span className="eyebrow">{t('home.approach.title')}</span>
+              <h2 style={{ marginTop: '0.8rem' }}>{t('home.approach.title')}</h2>
+            </div>
+            <p className="lead" style={{ maxWidth: '34ch' }}>
+              {t('home.approach.subtitle')}
+            </p>
           </div>
           <div className="approach-grid">
             {APPROACH.map((item, index) => (
@@ -181,15 +212,12 @@ export default function HomePage() {
       </section>
 
       {/* ---------------- équipe ---------------- */}
-      <section className="section team-section">
+      <section className="team-section" style={{ padding: 'clamp(4rem, 7vw, 6rem) 0', borderTop: '1px solid var(--line)' }}>
         <div className="shell">
-          <div
-            className="section-head"
-            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', maxWidth: 'none', gap: '2rem', flexWrap: 'wrap' }}
-          >
+          <div className="activities-head">
             <div>
               <span className="eyebrow">{t('home.team.title')}</span>
-              <h2 style={{ marginTop: '0.7rem' }}>{t('home.team.title')}</h2>
+              <h2 style={{ marginTop: '0.8rem' }}>{t('home.team.title')}</h2>
             </div>
             <Link href={href(locale, '/equipe')} className="link-arrow">
               {t('home.team.link')} <ArrowRight />

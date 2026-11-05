@@ -34,6 +34,13 @@ const fr: Dict = {
   'cta.view_all': 'Tout voir',
 
   'home.eyebrow': 'Niger · Depuis {year}',
+  'home.activities.label': 'Nos activités',
+  'home.feature.caption_title': 'Chantier de Niamey',
+  'home.feature.caption_text': 'Structure en béton armé — suivi d’exécution',
+  'home.meta.1': 'Bureau d’études & maîtrise d’œuvre',
+  'home.meta.2': 'Niamey, Niger',
+  'home.scroll': 'Découvrir',
+
   'services.label': 'Nos services',
   'home.card.title': 'Contact direct',
   'home.card.write': 'Écrire',
@@ -170,6 +177,13 @@ const en: Dict = {
   'cta.view_all': 'View all',
 
   'home.eyebrow': 'Niger · Since {year}',
+  'home.activities.label': 'What we do',
+  'home.feature.caption_title': 'Site in Niamey',
+  'home.feature.caption_text': 'Reinforced concrete structure — works supervision',
+  'home.meta.1': 'Design office & construction management',
+  'home.meta.2': 'Niamey, Niger',
+  'home.scroll': 'Discover',
+
   'services.label': 'Our services',
   'home.card.title': 'Direct contact',
   'home.card.write': 'Write',
