@@ -20,11 +20,12 @@
   --danger: #a63b31;
   --ok: #2f7a58;
 
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Manrope Variable", "Inter Variable", system-ui, -apple-system, sans-serif;
 
   --shell: 1200px;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --radius: 8px;
+  --radius-sm: 6px;
   --shadow-xs: 0 1px 2px rgba(11, 27, 38, 0.04);
   --shadow-sm: 0 8px 24px -18px rgba(11, 27, 38, 0.35);
   --shadow-md: 0 24px 60px -40px rgba(11, 27, 38, 0.45);
@@ -49,8 +50,9 @@ body {
   font-family: var(--font);
   color: var(--ink);
   background: var(--bg);
-  line-height: 1.65;
+  line-height: 1.68;
   font-size: 16.5px;
+  letter-spacing: -0.003em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -77,27 +79,32 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font);
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.032em;
   margin: 0;
   color: var(--ink);
+  text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2.35rem, 5vw, 4rem);
-  letter-spacing: -0.035em;
+  font-size: clamp(2.5rem, 5.4vw, 4.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
 }
 
 h2 {
-  font-size: clamp(1.65rem, 3vw, 2.5rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(1.7rem, 3.1vw, 2.55rem);
+  line-height: 1.08;
+  letter-spacing: -0.034em;
 }
 
 h3 {
-  font-size: clamp(1.02rem, 1.4vw, 1.16rem);
-  letter-spacing: -0.015em;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.25;
 }
 
 p {
@@ -120,12 +127,23 @@ p {
 }
 
 .eyebrow {
-  display: inline-block;
-  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;
   color: var(--blue);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  flex: 0 0 auto;
+  background: currentColor;
+  opacity: 0.5;
 }
 
 .eyebrow.on-dark {
@@ -157,21 +175,21 @@ p {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.6rem;
-  border-radius: 999px;
+  padding: 0.82rem 1.5rem;
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
   background: var(--btn-bg);
   color: var(--btn-fg);
-  font-size: 0.86rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
   cursor: pointer;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease,
     box-shadow 0.18s ease;
 }
 
 .btn:hover {
-  background: #14313f;
+  background: var(--blue-dark);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
@@ -213,16 +231,17 @@ p {
 .link-arrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-weight: 500;
-  font-size: 0.88rem;
-  color: var(--blue);
+  gap: 0.45rem;
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: 0.005em;
+  color: var(--blue-dark);
   transition: gap 0.18s ease, color 0.18s ease;
 }
 
 .link-arrow:hover {
-  gap: 0.65rem;
-  color: var(--blue-dark);
+  gap: 0.7rem;
+  color: var(--ink);
 }
 
 .tag {
@@ -318,19 +337,21 @@ p {
 
 .brand-name {
   display: block;
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   line-height: 1.15;
   color: var(--ink);
 }
 
 .brand-sub {
   display: block;
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--muted);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .nav {
@@ -340,7 +361,9 @@ p {
 }
 
 .nav a {
-  font-size: 0.9rem;
+  font-size: 0.87rem;
+  font-weight: 500;
+  letter-spacing: 0.004em;
   color: var(--ink-2);
   position: relative;
   padding: 0.4rem 0;
@@ -358,8 +381,8 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1.5px;
-  background: var(--ink);
+  height: 2px;
+  background: var(--blue);
 }
 
 .header-actions {
@@ -492,11 +515,13 @@ p {
 
 .stat strong {
   display: block;
-  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
   color: var(--ink);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat strong em {
@@ -506,8 +531,10 @@ p {
 
 .stat span {
   display: block;
-  margin-top: 0.55rem;
-  font-size: 0.82rem;
+  margin-top: 0.7rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -1723,10 +1750,10 @@ table.data tr:hover td {
 }
 
 .hero h1 {
-  margin: 1rem 0 0;
-  font-size: clamp(2.5rem, 5.6vw, 4.6rem);
-  letter-spacing: -0.04em;
-  line-height: 1.02;
+  margin: 1.1rem 0 0;
+  font-size: clamp(2.55rem, 5.8vw, 4.8rem);
+  letter-spacing: -0.045em;
+  line-height: 1.01;
 }
 
 .hero h1 .line {
@@ -1735,11 +1762,11 @@ table.data tr:hover td {
 
 .hero h1 .highlight {
   display: block;
-  color: var(--ink);
-  font-weight: 400;
-  font-style: italic;
-  font-family: Georgia, "Times New Roman", serif;
-  letter-spacing: -0.02em;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--blue-dark);
+  letter-spacing: -0.045em;
 }
 
 .hero-side {
@@ -1806,9 +1833,11 @@ table.data tr:hover td {
 }
 
 .feature-caption strong {
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--ink);
-  font-size: 0.82rem;
+  font-size: 0.86rem;
 }
 
 /* --- activités --- */
@@ -2000,8 +2029,9 @@ table.data tr:hover td {
 }
 
 .page-head h1 {
-  font-size: clamp(2.1rem, 4.4vw, 3.6rem);
-  letter-spacing: -0.035em;
+  font-size: clamp(2.2rem, 4.6vw, 3.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
   margin: 0.9rem 0 1.1rem;
   max-width: 26ch;
 }
@@ -2013,10 +2043,6 @@ table.data tr:hover td {
 
 .page-head .eyebrow {
   color: var(--muted);
-}
-
-.page-head .eyebrow::before {
-  display: none;
 }
 
 /* grille projets large (page liste) */
@@ -2044,8 +2070,10 @@ table.data tr:hover td {
 
 .facts strong {
   display: block;
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.8rem, 2.8vw, 2.35rem);
+  font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--ink);
   line-height: 1;
@@ -2174,4 +2202,114 @@ table.data tr:hover td {
   .facts {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* ==========================================================================
+   v4 — finitions corporate : libellés, chiffres, interactions
+   ========================================================================== */
+
+::selection {
+  background: var(--ink);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* libellés de section un peu plus resserrés */
+.activities-head .eyebrow,
+.section-head .eyebrow {
+  letter-spacing: 0.18em;
+}
+
+.activities-head h2 {
+  max-width: 24ch;
+}
+
+/* numérotation : chiffres alignés, sans bruit */
+.activity .index,
+.approach-item .num,
+.editorial-list .index {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* métadonnées et légendes en petites capitales */
+.project-meta,
+.domain-tile figcaption,
+.team-card .role {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.project-meta span + span::before {
+  margin-right: 0.6rem;
+}
+
+/* titres de cartes */
+.project-body h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.team-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* bandeau de contact */
+.cta-photo h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.65rem);
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+}
+
+.cta-photo p {
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* pied de page : libellés de colonnes */
+.site-footer h4 {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+}
+
+.site-footer ul {
+  font-size: 0.88rem;
+}
+
+/* photos manquantes : tuile monogramme plutôt qu'un cadre vide */
+.team-photo--empty {
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  border-radius: var(--radius-sm);
+}
+
+.team-photo .monogram {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  color: var(--blue-dark);
+}
+
+.project-media-fallback {
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 0.1em;
 }

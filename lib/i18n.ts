@@ -50,15 +50,19 @@ const fr: Dict = {
     'Quelques chantiers représentatifs de nos métiers. Les fiches projets détaillées seront publiées prochainement.',
 
   'home.expertise.title': 'Nos domaines d’intervention',
+  'home.expertise.heading': 'Quatre métiers, une seule exigence.',
   'home.expertise.subtitle':
     'Six expertises complémentaires, mobilisées ensemble sur chaque projet — de l’étude de faisabilité à la réception des ouvrages.',
   'home.projects.title': 'Réalisations',
+  'home.projects.heading': 'Des ouvrages conçus pour durer.',
   'home.projects.subtitle': 'Quelques projets conduits pour des institutions, des collectivités et des entreprises.',
   'home.projects.empty': 'Les premières réalisations seront publiées très prochainement.',
   'home.approach.title': 'Notre approche',
+  'home.approach.heading': 'De l’étude à la réception, une même équipe.',
   'home.approach.subtitle':
     'Une entreprise à taille humaine, ancrée à Niamey, qui associe exigence technique et connaissance fine du terrain.',
   'home.team.title': 'L’équipe',
+  'home.team.heading': 'Une équipe pluridisciplinaire, basée à Niamey.',
   'home.team.subtitle': 'Des profils complémentaires en ingénierie, gestion et logistique.',
   'home.team.link': 'Rencontrer l’équipe',
   'home.contact.title': 'Un projet à étudier, un chantier à conduire ?',
@@ -194,15 +198,19 @@ const en: Dict = {
     'A few sites representative of our trades. Detailed case studies will be published shortly.',
 
   'home.expertise.title': 'What we do',
+  'home.expertise.heading': 'Four disciplines, one standard.',
   'home.expertise.subtitle':
     'Six complementary disciplines, combined on every project — from feasibility studies to handover.',
   'home.projects.title': 'Selected work',
+  'home.projects.heading': 'Structures built to last.',
   'home.projects.subtitle': 'Projects delivered for institutions, local authorities and businesses.',
   'home.projects.empty': 'Our first case studies will be published shortly.',
   'home.approach.title': 'How we work',
+  'home.approach.heading': 'From study to handover, one team.',
   'home.approach.subtitle':
     'A human-sized firm based in Niamey, combining technical rigour with first-hand field knowledge.',
   'home.team.title': 'Our team',
+  'home.team.heading': 'A multidisciplinary team, based in Niamey.',
   'home.team.subtitle': 'Complementary profiles in engineering, management and logistics.',
   'home.team.link': 'Meet the team',
   'home.contact.title': 'A project to study, a site to deliver?',

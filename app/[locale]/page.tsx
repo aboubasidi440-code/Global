@@ -125,7 +125,7 @@ export default function HomePage() {
           <div className="activities-head">
             <div>
               <span className="eyebrow">{t('home.activities.label')}</span>
-              <h2 style={{ marginTop: '0.8rem' }}>{t('home.expertise.title')}</h2>
+              <h2 style={{ marginTop: '0.9rem' }}>{t('home.expertise.heading')}</h2>
             </div>
             <Link href={href(locale, '/projets')} className="link-arrow">
               {t('cta.all_projects')} <ArrowRight />
@@ -158,7 +158,10 @@ export default function HomePage() {
           <div className="activities-head">
             <div>
               <span className="eyebrow">{t('home.projects.title')}</span>
-              <h2 style={{ marginTop: '0.8rem' }}>{t('home.projects.title')}</h2>
+              <h2 style={{ marginTop: '0.9rem' }}>{t('home.projects.heading')}</h2>
+              <p className="lead" style={{ marginTop: '0.9rem', maxWidth: '46ch' }}>
+                {t('home.projects.subtitle')}
+              </p>
             </div>
             <Link href={href(locale, '/projets')} className="link-arrow">
               {t('cta.all_projects')} <ArrowRight />
@@ -193,7 +196,7 @@ export default function HomePage() {
           <div className="activities-head">
             <div>
               <span className="eyebrow">{t('home.approach.title')}</span>
-              <h2 style={{ marginTop: '0.8rem' }}>{t('home.approach.title')}</h2>
+              <h2 style={{ marginTop: '0.9rem' }}>{t('home.approach.heading')}</h2>
             </div>
             <p className="lead" style={{ maxWidth: '34ch' }}>
               {t('home.approach.subtitle')}
@@ -217,7 +220,10 @@ export default function HomePage() {
           <div className="activities-head">
             <div>
               <span className="eyebrow">{t('home.team.title')}</span>
-              <h2 style={{ marginTop: '0.8rem' }}>{t('home.team.title')}</h2>
+              <h2 style={{ marginTop: '0.9rem' }}>{t('home.team.heading')}</h2>
+              <p className="lead" style={{ marginTop: '0.9rem', maxWidth: '44ch' }}>
+                {t('home.team.subtitle')}
+              </p>
             </div>
             <Link href={href(locale, '/equipe')} className="link-arrow">
               {t('home.team.link')} <ArrowRight />
