@@ -21,11 +21,13 @@ type Homepage = {
   subtitle_en?: string;
 };
 
-const ACTIVITY_IMAGES = [
-  '/images/projet-batiment.jpg',
-  '/images/projet-hydraulique.jpg',
-  '/images/projet-solaire.jpg',
+const EXPERTISE_IMAGES = [
   '/images/hero-clair.jpg',
+  '/images/expertise-batiment.jpg',
+  '/images/expertise-hydraulique.jpg',
+  '/images/expertise-forage.webp',
+  '/images/expertise-solaire.jpg',
+  '/images/expertise-geniecivil.jpg',
 ];
 
 export default function HomePage() {
@@ -49,33 +51,33 @@ export default function HomePage() {
   const featured = projects.filter((project) => project.featured).slice(0, 3);
   const list = (featured.length ? featured : projects).slice(0, 3);
   const teamPreview = team.slice(0, 4);
-  const activities = EXPERTISE.slice(0, 4);
 
   return (
     <>
-      {/* ---------------- déclaration ---------------- */}
+      {/* ---------------- hero immersif ---------------- */}
       <section className="hero">
+        <div className="hero-bg" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/hero-chantier.jpg" alt="" />
+        </div>
         <div className="hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow">{t('home.eyebrow', { year })}</span>
+            <span className="eyebrow on-dark">{t('home.eyebrow', { year })}</span>
             <h1>
-              <span className="line">{text('headline_first', 'Construire aujourd’hui.')}</span>
-              <span className="highlight">{text('headline_second', 'Servir demain.')}</span>
+              <span className="line">
+                {text('headline_first', locale === 'en' ? 'ENGINEERING AT THE SERVICE OF' : "L'INGÉNIERIE AU SERVICE DU")}
+              </span>
+              <span className="highlight">{text('headline_second', locale === 'en' ? 'DEVELOPMENT' : 'DÉVELOPPEMENT')}</span>
             </h1>
           </div>
 
           <div className="hero-side">
-            <p className="lead">
-              {text(
-                'subtitle',
-                'À vos côtés pour concevoir et réaliser des projets durables en génie civil, hydraulique et énergie.',
-              )}
-            </p>
+            <p className="lead">{text('subtitle', t('home.hero.subtitle'))}</p>
             <div className="hero-actions">
-              <Link href={href(locale, '/projets')} className="link-arrow">
-                {t('cta.discover')} <ArrowRight />
+              <Link href={href(locale, '/expertises')} className="btn btn-primary">
+                {t('cta.explore_expertise')} <ArrowRight />
               </Link>
-              <Link href={href(locale, '/contact')} className="btn btn-ghost">
+              <Link href={href(locale, '/contact')} className="btn btn-outline-light">
                 {t('cta.contact')}
               </Link>
             </div>
@@ -87,73 +89,80 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- image d'ouverture ---------------- */}
-      <figure className="feature reveal" style={{ margin: 0 }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/hero-chantier.jpg" alt={t('home.feature.caption_title')} />
-        <figcaption className="feature-caption">
-          <strong>{t('home.feature.caption_title')}</strong>
-          <span>{t('home.feature.caption_text')}</span>
-        </figcaption>
-      </figure>
-
-      {/* ---------------- chiffres ---------------- */}
-      <section className="stats" style={{ marginTop: 'clamp(3rem, 5vw, 4.5rem)' }}>
-        <div className="shell stats-grid">
-          <div className="stat">
-            <strong>{year}</strong>
-            <span>{locale === 'en' ? 'Founded in Niamey' : 'Créée à Niamey'}</span>
+      {/* ---------------- présentation de l'entreprise ---------------- */}
+      <section className="section">
+        <div className="shell about-split">
+          <div className="about-media reveal">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/banner-ingenieurs.jpg" alt={t('home.about.title')} loading="lazy" />
           </div>
-          <div className="stat">
-            <strong>{homepage.team_size || '~10'}</strong>
-            <span>{t('stats.team')}</span>
-          </div>
-          <div className="stat">
-            <strong>{homepage.expertise_count || '6'}</strong>
-            <span>{t('stats.expertise')}</span>
-          </div>
-          <div className="stat">
-            <strong>{homepage.location || 'Niger'}</strong>
-            <span>{t('stats.location')}</span>
+          <div className="about-copy reveal">
+            <span className="eyebrow">{t('home.about.eyebrow')}</span>
+            <h2>{t('home.about.title')}</h2>
+            <p className="lead">{t('home.about.text')}</p>
+            <div className="stats-grid" style={{ border: 'none', marginTop: '0.6rem' }}>
+              <div className="stat" style={{ border: 'none', padding: '0.4rem 0' }}>
+                <strong>{year}</strong>
+                <span>{locale === 'en' ? 'Year founded' : 'Année de création'}</span>
+              </div>
+              <div className="stat" style={{ border: 'none', padding: '0.4rem 0' }}>
+                <strong>{homepage.team_size || '~10'}</strong>
+                <span>{t('stats.team')}</span>
+              </div>
+              <div className="stat" style={{ border: 'none', padding: '0.4rem 0' }}>
+                <strong>{homepage.expertise_count || '4'}</strong>
+                <span>{t('stats.expertise')}</span>
+              </div>
+              <div className="stat" style={{ border: 'none', padding: '0.4rem 0' }}>
+                <strong>{homepage.location || 'Niger'}</strong>
+                <span>{locale === 'en' ? 'Country of operation' : 'Pays d’implantation'}</span>
+              </div>
+            </div>
+            <div>
+              <Link href={href(locale, '/a-propos')} className="btn btn-primary">
+                {t('home.about.cta')} <ArrowRight />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ---------------- activités ---------------- */}
-      <section className="activities" id="expertises">
+      {/* ---------------- vitrine expertises (sombre) ---------------- */}
+      <section className="expertise-showcase">
         <div className="shell">
           <div className="activities-head">
             <div>
-              <span className="eyebrow">{t('home.activities.label')}</span>
+              <span className="eyebrow on-dark">{t('home.activities.label')}</span>
               <h2 style={{ marginTop: '0.8rem' }}>{t('home.expertise.title')}</h2>
             </div>
-            <Link href={href(locale, '/projets')} className="link-arrow">
-              {t('cta.all_projects')} <ArrowRight />
-            </Link>
+            <p className="lead" style={{ maxWidth: '36ch' }}>
+              {t('home.expertise.subtitle')}
+            </p>
           </div>
 
-          <div className="activities-grid">
-            {activities.map((item, index) => (
-              <article className="activity reveal" key={item.slug}>
-                <div className="activity-media">
+          <div className="expertise-grid">
+            {EXPERTISE.map((item, index) => (
+              <Link href={href(locale, '/expertises')} className="exp-card reveal" key={item.slug}>
+                <span className="exp-num">{String(index + 1).padStart(2, '0')}</span>
+                <div className="exp-card-media" aria-hidden="true">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={ACTIVITY_IMAGES[index] ?? '/images/hero-chantier.jpg'}
-                    alt={locale === 'en' ? item.titleEn : item.title}
-                    loading="lazy"
-                  />
+                  <img src={EXPERTISE_IMAGES[index] ?? '/images/hero-chantier.jpg'} alt="" loading="lazy" />
                 </div>
-                <span className="index">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{locale === 'en' ? item.titleEn : item.title}</h3>
-                <p>{locale === 'en' ? item.textEn : item.text}</p>
-              </article>
+                <div className="exp-body">
+                  <h3>{locale === 'en' ? item.titleEn : item.title}</h3>
+                  <p>{locale === 'en' ? item.textEn : item.text}</p>
+                  <span className="link-arrow">
+                    {t('home.expertise.more')} <ArrowRight />
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* ---------------- réalisations ---------------- */}
-      <section className="projects-section" style={{ borderTop: '1px solid var(--line)' }}>
+      <section className="projects-section">
         <div className="shell">
           <div className="activities-head">
             <div>
@@ -187,8 +196,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- approche ---------------- */}
-      <section className="approach" style={{ borderTop: '1px solid var(--line)', padding: 'clamp(4rem, 7vw, 6rem) 0' }}>
+      {/* ---------------- approche / confiance ---------------- */}
+      <section className="approach">
         <div className="shell">
           <div className="activities-head">
             <div>
@@ -201,7 +210,7 @@ export default function HomePage() {
           </div>
           <div className="approach-grid">
             {APPROACH.map((item, index) => (
-              <div className="approach-item" key={item.key}>
+              <div className="approach-item reveal" key={item.key}>
                 <span className="num">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{t(`${item.key}.title`)}</h3>
                 <p>{t(`${item.key}.text`)}</p>
@@ -212,7 +221,7 @@ export default function HomePage() {
       </section>
 
       {/* ---------------- équipe ---------------- */}
-      <section className="team-section" style={{ padding: 'clamp(4rem, 7vw, 6rem) 0', borderTop: '1px solid var(--line)' }}>
+      <section className="team-section">
         <div className="shell">
           <div className="activities-head">
             <div>
@@ -240,13 +249,17 @@ export default function HomePage() {
 
       {/* ---------------- appel à l'action ---------------- */}
       <section className="cta-photo">
+        <div className="cta-photo-media" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/banner-contact.jpg" alt="" loading="lazy" />
+        </div>
         <div className="shell cta-photo-inner">
           <div>
-            <h2>{t('home.contact.title')}</h2>
+            <h2>{t('home.cta.title')}</h2>
             <p>{t('home.contact.subtitle')}</p>
           </div>
-          <Link href={href(locale, '/contact')} className="btn btn-light">
-            {t('cta.contact')} <ArrowRight />
+          <Link href={href(locale, '/contact')} className="btn btn-primary">
+            {t('cta.talk_project')} <ArrowRight />
           </Link>
         </div>
       </section>

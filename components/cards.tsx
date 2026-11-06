@@ -34,7 +34,7 @@ export function ProjectCard({ project, locale }: { project: Project; locale: Loc
         <h3>{title}</h3>
         <p>{excerpt(bilingual(project, 'description', locale), 120)}</p>
         <span className="link-arrow">
-          {t('cta.read')} <ArrowRight />
+          {t('projects.view')} <ArrowRight />
         </span>
       </div>
     </Link>

@@ -137,8 +137,8 @@ export default function ContactForm({ locale }: { locale: Locale }) {
       ) : null}
 
       <div className="form-actions">
-        <button type="submit" className="btn" disabled={sending}>
-          {sending ? t('cta.sending') : t('cta.send')}
+        <button type="submit" className="btn btn-primary" disabled={sending}>
+          {sending ? t('cta.sending') : t('contact.form.send')}
         </button>
         <span className="form-note">{t('contact.form.required')} *</span>
       </div>

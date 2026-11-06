@@ -17,6 +17,11 @@ export default function NewsPage() {
     <>
       <section className="page-head">
         <div className="shell">
+          <nav className="breadcrumb" aria-label="breadcrumb">
+            <Link href={href(locale)}>{t('nav.home')}</Link>
+            <span aria-hidden="true">›</span>
+            <span>{t('nav.news')}</span>
+          </nav>
           <span className="eyebrow">{t('nav.news')}</span>
           <h1>{t('news.title')}</h1>
           <p className="lead">{t('news.lead')}</p>

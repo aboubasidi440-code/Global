@@ -14,8 +14,9 @@ const fr: Dict = {
 
   'nav.home': 'Accueil',
   'nav.about': 'À propos',
-  'nav.projects': 'Projets',
-  'nav.team': 'Équipe',
+  'nav.expertises': 'Nos expertises',
+  'nav.projects': 'Nos réalisations',
+  'nav.team': 'Notre équipe',
   'nav.news': 'Actualités',
   'nav.documents': 'Documents',
   'nav.contact': 'Contact',
@@ -24,7 +25,10 @@ const fr: Dict = {
   'nav.close': 'Fermer',
 
   'cta.contact': 'Nous contacter',
-  'cta.discover': 'Découvrir nos projets',
+  'cta.quote': 'Demander un devis',
+  'cta.explore_expertise': 'Découvrir nos expertises',
+  'cta.talk_project': 'Discuter de votre projet',
+  'cta.discover': 'Découvrir nos réalisations',
   'cta.all_projects': 'Tous les projets',
   'cta.all_news': 'Toutes les actualités',
   'cta.read': 'Lire la suite',
@@ -34,7 +38,15 @@ const fr: Dict = {
   'cta.sending': 'Envoi en cours…',
   'cta.view_all': 'Tout voir',
 
-  'home.eyebrow': 'Niger · Depuis {year}',
+  'home.eyebrow': 'Niamey, Niger · Depuis {year}',
+  'home.hero.subtitle':
+    'Des solutions intégrées en construction, génie civil, hydraulique et infrastructures pour accompagner les ambitions de demain.',
+  'home.about.eyebrow': 'Qui sommes-nous ?',
+  'home.about.title': 'L’expertise au service du développement',
+  'home.about.text':
+    'GLOBAL SOLUTIONS est une entreprise nigérienne créée en 2017, spécialisée dans le BTP, le génie civil, l’hydraulique et les infrastructures.',
+  'home.about.cta': 'Découvrir notre entreprise',
+  'home.cta.title': 'Vous avez un projet ? Construisons ensemble votre avenir.',
   'home.activities.label': 'Nos activités',
   'home.feature.caption_title': 'Chantier de Niamey',
   'home.feature.caption_text': 'Structure en béton armé — suivi d’exécution',
@@ -49,10 +61,11 @@ const fr: Dict = {
   'home.gallery.subtitle':
     'Quelques chantiers représentatifs de nos métiers. Les fiches projets détaillées seront publiées prochainement.',
 
-  'home.expertise.title': 'Nos domaines d’intervention',
+  'home.expertise.title': 'Nos expertises',
   'home.expertise.subtitle':
-    'Six expertises complémentaires, mobilisées ensemble sur chaque projet — de l’étude de faisabilité à la réception des ouvrages.',
-  'home.projects.title': 'Réalisations',
+    'Une expertise complète au service de vos projets, du premier diagnostic à la réception des ouvrages.',
+  'home.expertise.more': 'En savoir plus',
+  'home.projects.title': 'Nos réalisations',
   'home.projects.subtitle': 'Quelques projets conduits pour des institutions, des collectivités et des entreprises.',
   'home.projects.empty': 'Les premières réalisations seront publiées très prochainement.',
   'home.approach.title': 'Notre approche',
@@ -79,8 +92,9 @@ const fr: Dict = {
   'approach.item4.title': 'Durabilité',
   'approach.item4.text': 'Des ouvrages pensés pour être exploités et entretenus localement, sur plusieurs décennies.',
 
-  'projects.title': 'Projets',
-  'projects.lead': 'Études, travaux et maîtrise d’œuvre conduits par Global Solutions.',
+  'projects.title': 'Nos réalisations',
+  'projects.lead': 'Découvrez les projets et les interventions de GLOBAL SOLUTIONS.',
+  'projects.view': 'Voir le projet',
   'projects.empty': 'Aucun projet publié pour le moment.',
   'projects.filter.all': 'Tous',
   'projects.meta.location': 'Localisation',
@@ -108,6 +122,13 @@ const fr: Dict = {
 
   'contact.title': 'Contact',
   'contact.lead': 'Écrivez-nous : nous répondons sous deux jours ouvrés.',
+  'contact.banner.title': 'Donnons vie à vos projets',
+  'contact.banner.lead':
+    'Notre équipe est à votre écoute pour répondre à vos questions et étudier vos projets.',
+  'contact.quick.call': 'Appeler',
+  'contact.quick.whatsapp': 'WhatsApp',
+  'contact.quick.email': 'Email',
+  'contact.form.send': 'Envoyer le message',
   'contact.form.title': 'Décrivez votre projet',
   'contact.form.name': 'Nom et prénom',
   'contact.form.organisation': 'Organisation',
@@ -139,6 +160,7 @@ const fr: Dict = {
   'footer.about':
     'Global Solutions conçoit et réalise des projets de génie civil, d’hydraulique et d’énergie au Niger.',
   'footer.navigation': 'Navigation',
+  'footer.expertises': 'Expertises',
   'footer.contact': 'Contact',
   'footer.rights': 'Tous droits réservés.',
   'footer.legal': 'Mentions légales',
@@ -158,8 +180,9 @@ const en: Dict = {
 
   'nav.home': 'Home',
   'nav.about': 'About',
-  'nav.projects': 'Projects',
-  'nav.team': 'Team',
+  'nav.expertises': 'Our expertise',
+  'nav.projects': 'Our projects',
+  'nav.team': 'Our team',
   'nav.news': 'News',
   'nav.documents': 'Documents',
   'nav.contact': 'Contact',
@@ -168,6 +191,9 @@ const en: Dict = {
   'nav.close': 'Close',
 
   'cta.contact': 'Get in touch',
+  'cta.quote': 'Request a quote',
+  'cta.explore_expertise': 'Explore our expertise',
+  'cta.talk_project': 'Discuss your project',
   'cta.discover': 'Explore our projects',
   'cta.all_projects': 'All projects',
   'cta.all_news': 'All news',
@@ -178,7 +204,15 @@ const en: Dict = {
   'cta.sending': 'Sending…',
   'cta.view_all': 'View all',
 
-  'home.eyebrow': 'Niger · Since {year}',
+  'home.eyebrow': 'Niamey, Niger · Since {year}',
+  'home.hero.subtitle':
+    'Integrated solutions in construction, civil engineering, water and infrastructure to support tomorrow’s ambitions.',
+  'home.about.eyebrow': 'Who we are',
+  'home.about.title': 'Expertise serving development',
+  'home.about.text':
+    'GLOBAL SOLUTIONS is a Nigerien company founded in 2017, specialised in construction, civil engineering, water and infrastructure.',
+  'home.about.cta': 'Discover our company',
+  'home.cta.title': 'Have a project? Let’s build your future together.',
   'home.activities.label': 'What we do',
   'home.feature.caption_title': 'Site in Niamey',
   'home.feature.caption_text': 'Reinforced concrete structure — works supervision',
@@ -193,10 +227,11 @@ const en: Dict = {
   'home.gallery.subtitle':
     'A few sites representative of our trades. Detailed case studies will be published shortly.',
 
-  'home.expertise.title': 'What we do',
+  'home.expertise.title': 'Our expertise',
   'home.expertise.subtitle':
-    'Six complementary disciplines, combined on every project — from feasibility studies to handover.',
-  'home.projects.title': 'Selected work',
+    'Complete expertise serving your projects, from the first assessment to handover.',
+  'home.expertise.more': 'Learn more',
+  'home.projects.title': 'Our projects',
   'home.projects.subtitle': 'Projects delivered for institutions, local authorities and businesses.',
   'home.projects.empty': 'Our first case studies will be published shortly.',
   'home.approach.title': 'How we work',
@@ -223,8 +258,9 @@ const en: Dict = {
   'approach.item4.title': 'Durability',
   'approach.item4.text': 'Infrastructure designed to be operated and maintained locally for decades.',
 
-  'projects.title': 'Projects',
-  'projects.lead': 'Studies, works and construction management delivered by Global Solutions.',
+  'projects.title': 'Our projects',
+  'projects.lead': 'Discover the projects and interventions of GLOBAL SOLUTIONS.',
+  'projects.view': 'View project',
   'projects.empty': 'No project published yet.',
   'projects.filter.all': 'All',
   'projects.meta.location': 'Location',
@@ -252,6 +288,12 @@ const en: Dict = {
 
   'contact.title': 'Contact',
   'contact.lead': 'Write to us — we reply within two business days.',
+  'contact.banner.title': 'Let’s bring your projects to life',
+  'contact.banner.lead': 'Our team is here to answer your questions and study your projects.',
+  'contact.quick.call': 'Call',
+  'contact.quick.whatsapp': 'WhatsApp',
+  'contact.quick.email': 'Email',
+  'contact.form.send': 'Send message',
   'contact.form.title': 'Tell us about your project',
   'contact.form.name': 'Full name',
   'contact.form.organisation': 'Organisation',
@@ -283,6 +325,7 @@ const en: Dict = {
   'footer.about':
     'Global Solutions designs and delivers civil engineering, water and energy projects in Niger.',
   'footer.navigation': 'Navigation',
+  'footer.expertises': 'Expertise',
   'footer.contact': 'Contact',
   'footer.rights': 'All rights reserved.',
   'footer.legal': 'Legal notice',
