@@ -90,6 +90,11 @@ export default function AboutPage() {
     <>
       <section className="page-head">
         <div className="shell">
+          <nav className="breadcrumb" aria-label="breadcrumb">
+            <Link href={href(locale)}>{locale === 'en' ? 'Home' : 'Accueil'}</Link>
+            <span aria-hidden="true">›</span>
+            <span>{copy.eyebrow}</span>
+          </nav>
           <span className="eyebrow">{copy.eyebrow}</span>
           <h1>{copy.title}</h1>
           <p className="lead">{copy.lead}</p>

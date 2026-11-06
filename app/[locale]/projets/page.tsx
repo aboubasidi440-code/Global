@@ -1,10 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { ProjectCard } from '@/components/cards';
 import { usePublishedProjects } from '@/lib/data';
-import { bilingual, isLocale, translator } from '@/lib/i18n';
+import { bilingual, href, isLocale, translator } from '@/lib/i18n';
 
 export default function ProjectsPage() {
   const params = useParams<{ locale: string }>();
@@ -26,8 +27,16 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <section className="page-head">
+      <section
+        className="page-head page-head--banner"
+        style={{ ['--banner-img' as string]: "url('/images/expertise-voirie.jpg')" }}
+      >
         <div className="shell">
+          <nav className="breadcrumb" aria-label="breadcrumb">
+            <Link href={href(locale)}>{t('nav.home')}</Link>
+            <span aria-hidden="true">›</span>
+            <span>{t('nav.projects')}</span>
+          </nav>
           <span className="eyebrow">{t('nav.projects')}</span>
           <h1>{t('projects.title')}</h1>
           <p className="lead">{t('projects.lead')}</p>
