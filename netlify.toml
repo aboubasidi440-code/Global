@@ -1,0 +1,20 @@
+# ==========================================================================
+# Global Solutions — déploiement Netlify (Next.js 16, App Router)
+# ==========================================================================
+
+[build]
+  command = "npm run build"
+
+[build.environment]
+  # Next.js 16 exige Node >= 20.9 : on épingle Node 22 pour éviter un build
+  # silencieusement exécuté avec une vieille version de Node.
+  NODE_VERSION = "22"
+  # Variables publiques par conception (la RLS Supabase protège les données) :
+  # mêmes valeurs que .env.example / lib/supabase.ts.
+  NEXT_PUBLIC_SUPABASE_URL = "https://zjfrxfddrzkvpgtaorqp.supabase.co"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqZnJ4ZmRkcnprdnBndGFvcnFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4Nzc2NzAsImV4cCI6MjEwOTQ1MzY3MH0.xC70ilR_CQMsomSV6fPE1xtWvttkQQgPC9Q50jqUJk0"
+
+# Plugin officiel : gère le SSR, les routes dynamiques, les rewrites et le
+# répertoire de publication (.next) automatiquement.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

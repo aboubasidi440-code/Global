@@ -96,5 +96,20 @@ supabase/
 
 ## Déploiement
 
-Le site est prêt pour Vercel/Netlify : `npm run build`. Renseigner les deux variables `NEXT_PUBLIC_*` dans
-l’hébergeur, et ajouter le domaine final aux *Redirect URLs* Supabase Auth (`site_url` de l’authentification).
+### Netlify (configuration fournie)
+
+Le dépôt contient un `netlify.toml` (plugin officiel `@netlify/plugin-nextjs`, Node 22 épinglé via
+`NODE_VERSION` et `.nvmrc`, variables `NEXT_PUBLIC_*` renseignées) : **« Add new site → Import from Git »**
+suffit, aucun réglage manuel requis. Le plugin gère le SSR et les routes dynamiques.
+
+Vérifications côté Netlify / Supabase :
+
+1. Ajouter le domaine Netlify aux *Redirect URLs* de l’authentification Supabase
+   (*Authentication → URL Configuration*), ainsi que `site_url`.
+2. Si les variables sont retirées du `netlify.toml`, les renseigner dans
+   *Site settings → Environment variables* (valeurs identiques à `.env.example`).
+
+### Vercel
+
+`npm run build` + les deux variables `NEXT_PUBLIC_*` dans les *Environment Variables*, puis ajouter le domaine
+final aux *Redirect URLs* Supabase Auth.
