@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SERVICES } from '@/lib/content';
 import { translator, type Locale } from '@/lib/i18n';
 import { FUNCTIONS_URL, SUPABASE_ANON_KEY } from '@/lib/supabase';
@@ -12,6 +12,14 @@ export default function ContactForm({ locale }: { locale: Locale }) {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<Status>(null);
   const [sent, setSent] = useState(false);
+  const [service, setService] = useState('');
+
+  // Préselection depuis les cartes d'expertise (?service=hydraulique), sans useSearchParams
+  // afin de ne pas imposer de frontière Suspense au prerender de la page.
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get('service');
+    if (value && SERVICES.some((item) => item.value === value)) setService(value);
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,6 +28,11 @@ export default function ContactForm({ locale }: { locale: Locale }) {
 
     const required = ['name', 'email', 'service', 'message'];
     if (required.some((field) => !String(data.get(field) || '').trim())) {
+      setStatus({ tone: 'error', message: t('contact.form.error_required') });
+      return;
+    }
+    if (!form.checkValidity()) {
+      form.reportValidity();
       setStatus({ tone: 'error', message: t('contact.form.error_required') });
       return;
     }
@@ -44,6 +57,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
         return;
       }
       form.reset();
+      setService('');
       setSent(true);
     } catch {
       setStatus({ tone: 'error', message: t('contact.form.error_generic') });
@@ -54,10 +68,10 @@ export default function ContactForm({ locale }: { locale: Locale }) {
 
   if (sent) {
     return (
-      <div className="form-card">
+      <div className="form-card form-success" role="status">
         <span className="tag">{t('contact.form.success.title')}</span>
-        <h2 style={{ margin: '1rem 0 0.8rem', fontSize: '1.7rem' }}>{t('contact.form.success.title')}</h2>
-        <p style={{ color: 'var(--ink-soft)' }}>{t('contact.form.success.text')}</p>
+        <h2>{t('contact.form.success.title')}</h2>
+        <p className="lead">{t('contact.form.success.text')}</p>
         <div className="form-actions">
           <button
             type="button"
@@ -75,11 +89,9 @@ export default function ContactForm({ locale }: { locale: Locale }) {
   }
 
   return (
-    <form className="form-card" onSubmit={handleSubmit} noValidate>
-      <h2 style={{ fontSize: '1.6rem', marginBottom: '0.4rem' }}>{t('contact.form.title')}</h2>
-      <p className="form-note" style={{ marginBottom: '1.4rem' }}>
-        {t('contact.form.required')} *
-      </p>
+    <form className="form-card" onSubmit={handleSubmit} noValidate aria-busy={sending}>
+      <h2>{t('contact.form.title')}</h2>
+      <p className="form-note form-intro">{t('contact.form.required')} *</p>
 
       <div className="form-grid">
         <div className="field">
@@ -104,13 +116,19 @@ export default function ContactForm({ locale }: { locale: Locale }) {
         </div>
         <div className="field field-full">
           <label htmlFor="service">{t('contact.form.service')} *</label>
-          <select id="service" name="service" defaultValue="" required>
+          <select
+            id="service"
+            name="service"
+            value={service}
+            onChange={(event) => setService(event.target.value)}
+            required
+          >
             <option value="" disabled>
               {t('contact.form.service_placeholder')}
             </option>
-            {SERVICES.map((service) => (
-              <option key={service.value} value={service.value}>
-                {locale === 'en' ? service.en : service.fr}
+            {SERVICES.map((item) => (
+              <option key={item.value} value={item.value}>
+                {locale === 'en' ? item.en : item.fr}
               </option>
             ))}
           </select>
@@ -124,14 +142,14 @@ export default function ContactForm({ locale }: { locale: Locale }) {
           <input id="attachment" name="attachment" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp" />
           <span className="hint">{t('contact.form.optional')}</span>
         </div>
-        <div className="field" aria-hidden="true" style={{ display: 'none' }}>
+        <div className="field" aria-hidden="true" hidden>
           <label htmlFor="website">Website</label>
           <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
         </div>
       </div>
 
       {status ? (
-        <p className="form-status" data-tone={status.tone}>
+        <p className="form-status" data-tone={status.tone} role={status.tone === 'error' ? 'alert' : 'status'}>
           {status.message}
         </p>
       ) : null}

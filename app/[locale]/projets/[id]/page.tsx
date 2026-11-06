@@ -15,7 +15,7 @@ export default function ProjectDetailPage() {
   const t = translator(locale);
   const id = params?.id ?? '';
 
-  const { data: project, loading } = useProject(id);
+  const { data: project, loading, error, reload } = useProject(id);
   const { data: all } = usePublishedProjects();
   const images = project?.image_urls ?? [];
   const urls = useSignedUrls(images);
@@ -28,6 +28,21 @@ export default function ProjectDetailPage() {
       <section className="section">
         <div className="shell">
           <p className="loading-line">{t('common.loading')}</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="section">
+        <div className="shell">
+          <div className="empty-state" role="alert">
+            <p>{t('common.error')}</p>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={reload}>
+              {t('common.retry')}
+            </button>
+          </div>
         </div>
       </section>
     );
@@ -146,7 +161,7 @@ export default function ProjectDetailPage() {
       </section>
 
       {others.length ? (
-        <section className="section-tight" style={{ background: 'var(--paper)', borderTop: '1px solid var(--line)' }}>
+        <section className="section-tight" style={{ background: 'var(--bg-soft)', borderTop: '1px solid var(--line)' }}>
           <div className="shell">
             <h2 style={{ marginBottom: '1.6rem', fontSize: '1.8rem' }}>{t('projects.others')}</h2>
             <div className="projects-grid">

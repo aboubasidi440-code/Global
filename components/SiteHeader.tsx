@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Logo from './Logo';
-import { href, translator, type Locale } from '@/lib/i18n';
+import { href, switchLocalePath, translator, type Locale } from '@/lib/i18n';
 
 const NAV = [
   { key: 'nav.home', path: '' },
@@ -15,68 +15,116 @@ const NAV = [
   { key: 'nav.contact', path: '/contact' },
 ];
 
-function otherLocalePath(pathname: string, locale: Locale) {
-  const target = locale === 'fr' ? 'en' : 'fr';
-  const parts = pathname.split('/');
-  parts[1] = target;
-  return parts.join('/') || `/${target}`;
-}
-
 export default function SiteHeader({ locale }: { locale: Locale }) {
   const t = translator(locale);
   const pathname = usePathname() || '';
   const [open, setOpen] = useState(false);
-  const currentPath = pathname.replace(`/${locale}`, '') || '';
+  const headerRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const currentPath = pathname.replace(/^\/(fr|en)(?=\/|$)/, '') || '';
+
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [open]);
+
+  const isActive = (path: string) =>
+    path === '' ? currentPath === '' : currentPath === path || currentPath.startsWith(`${path}/`);
+
+  const links = NAV.map((item) => (
+    <Link
+      key={item.key}
+      href={href(locale, item.path)}
+      data-active={isActive(item.path)}
+      aria-current={isActive(item.path) ? 'page' : undefined}
+      onClick={() => setOpen(false)}
+    >
+      {t(item.key)}
+    </Link>
+  ));
 
   return (
-    <header className="site-header" data-open={open}>
-        <div className="shell site-header-inner">
-          <Link href={href(locale)} className="brand" onClick={() => setOpen(false)}>
-            <Logo />
-            <span>
-              <span className="brand-name">{t('brand.name')}</span>
-              <span className="brand-sub">BTP · Hydraulique · Énergie</span>
-            </span>
-          </Link>
+    <header className="site-header" data-open={open} ref={headerRef}>
+      <div className="shell site-header-inner">
+        <Link href={href(locale)} className="brand" onClick={() => setOpen(false)} aria-label={t('brand.name')}>
+          <Logo />
+          <span>
+            <span className="brand-name">{t('brand.name')}</span>
+            <span className="brand-sub">{t('brand.tagline')}</span>
+          </span>
+        </Link>
 
-          <nav className="nav">
-            {NAV.map((item) => (
-              <Link
-                key={item.key}
-                href={href(locale, item.path)}
-                data-active={
-                  item.path === '' ? currentPath === '' : currentPath.startsWith(item.path) ? 'true' : 'false'
-                }
-                onClick={() => setOpen(false)}
-              >
-                {t(item.key)}
-              </Link>
-            ))}
-          </nav>
+        <nav className="nav nav-desktop" aria-label={t('footer.navigation')}>
+          {links}
+        </nav>
 
-          <div className="header-actions">
-            <div className="lang-switch" aria-label={t('common.language')}>
-              <Link href={otherLocalePath(pathname, locale)} data-active={locale === 'fr' ? 'true' : 'false'}>
-                FR
-              </Link>
-              <Link href={otherLocalePath(pathname, locale)} data-active={locale === 'en' ? 'true' : 'false'}>
-                EN
-              </Link>
-            </div>
-            <Link href={href(locale, '/contact')} className="btn btn-sm">
-              {t('cta.contact')}
-            </Link>
-            <button
-              type="button"
-              className="menu-toggle"
-              aria-expanded={open}
-              aria-label={open ? t('nav.close') : t('nav.menu')}
-              onClick={() => setOpen((value) => !value)}
+        <div className="header-actions">
+          <div className="lang-switch" aria-label={t('common.language')}>
+            <Link
+              href={switchLocalePath(pathname, 'fr')}
+              hrefLang="fr"
+              lang="fr"
+              data-active={locale === 'fr'}
+              aria-current={locale === 'fr' ? 'true' : undefined}
+              aria-label="Français"
             >
-              {open ? t('nav.close') : t('nav.menu')}
-            </button>
+              FR
+            </Link>
+            <Link
+              href={switchLocalePath(pathname, 'en')}
+              hrefLang="en"
+              lang="en"
+              data-active={locale === 'en'}
+              aria-current={locale === 'en' ? 'true' : undefined}
+              aria-label="English"
+            >
+              EN
+            </Link>
           </div>
+          <Link href={href(locale, '/contact')} className="btn btn-sm header-cta">
+            {t('cta.contact')}
+          </Link>
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            aria-label={open ? t('nav.close') : t('nav.menu')}
+            onClick={() => setOpen((value) => !value)}
+            ref={toggleRef}
+          >
+            <span className="menu-icon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+            <span className="menu-label">{open ? t('nav.close') : t('nav.menu')}</span>
+          </button>
         </div>
+      </div>
+
+      <nav id="mobile-navigation" className="nav-mobile" hidden={!open} aria-label={t('footer.navigation')}>
+        {links}
+        <Link href={href(locale, '/contact')} className="btn btn-sm" onClick={() => setOpen(false)}>
+          {t('cta.contact')}
+        </Link>
+      </nav>
     </header>
   );
 }

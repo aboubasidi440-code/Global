@@ -21,6 +21,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
   const contact = (data?.contact ?? {}) as ContactSettings;
   const year = new Date().getFullYear();
   const wa = whatsappLink(contact.whatsapp);
+  const hasContact = Boolean(contact.address || contact.phone_primary || contact.email_primary || wa);
 
   return (
     <footer className="site-footer">
@@ -31,7 +32,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
               <Logo size={40} />
               <span>
                 <span className="brand-name">{t('brand.name')}</span>
-                <span className="brand-sub">BTP · Hydraulique · Énergie</span>
+                <span className="brand-sub">{t('brand.tagline')}</span>
               </span>
             </span>
             <p className="footer-about">{t('footer.about')}</p>
@@ -40,6 +41,9 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
           <div>
             <h4>{t('footer.navigation')}</h4>
             <ul>
+              <li>
+                <Link href={href(locale, '/a-propos')}>{t('nav.about')}</Link>
+              </li>
               <li>
                 <Link href={href(locale, '/projets')}>{t('nav.projects')}</Link>
               </li>
@@ -51,9 +55,6 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
               </li>
               <li>
                 <Link href={href(locale, '/documents')}>{t('nav.documents')}</Link>
-              </li>
-              <li>
-                <Link href={href(locale, '/contact')}>{t('nav.contact')}</Link>
               </li>
             </ul>
           </div>
@@ -84,6 +85,11 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
                   </a>
                 </li>
               ) : null}
+              {!hasContact ? (
+                <li>
+                  <Link href={href(locale, '/contact')}>{t('cta.contact')}</Link>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>
@@ -92,7 +98,8 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
           <span>
             © {year} {t('brand.name')} — {t('footer.rights')}
           </span>
-          <span>
+          <span className="footer-bottom-links">
+            <a href="#contenu">{t('footer.top')}</a>
             <Link href="/admin">{t('footer.admin')}</Link>
           </span>
         </div>

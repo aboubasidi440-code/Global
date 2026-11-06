@@ -11,6 +11,14 @@ cp .env.example .env.local   # déjà fourni dans l'environnement de prévisuali
 npm run dev                  # http://localhost:3000
 ```
 
+Vérifications rapides :
+
+```bash
+npm run typecheck
+npm test                     # régressions i18n (sélecteur FR/EN, chemins localisés)
+npm run build
+```
+
 Variables d’environnement (la clé publishable est publique par conception, la RLS protège les données) :
 
 | Variable | Valeur |
