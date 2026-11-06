@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import '@fontsource-variable/manrope/index.css';
+import '@fontsource-variable/dm-sans/index.css';
 import './globals.css';
 
 export const metadata: Metadata = {

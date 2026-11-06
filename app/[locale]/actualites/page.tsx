@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import CollectionState from '@/components/CollectionState';
 import { useArticles } from '@/lib/data';
 import { bilingual, href, isLocale, translator } from '@/lib/i18n';
 import { excerpt, formatDate } from '@/lib/format';
@@ -11,7 +12,7 @@ export default function NewsPage() {
   const params = useParams<{ locale: string }>();
   const locale = isLocale(params?.locale) ? params.locale : 'fr';
   const t = translator(locale);
-  const { data: articles, loading } = useArticles();
+  const { data: articles, loading, error, reload } = useArticles();
 
   return (
     <>
@@ -25,9 +26,14 @@ export default function NewsPage() {
 
       <section className="section-tight">
         <div className="shell">
-          {loading ? (
-            <p className="loading-line">{t('common.loading')}</p>
-          ) : articles.length ? (
+          <CollectionState
+            locale={locale}
+            loading={loading}
+            error={error}
+            onRetry={reload}
+            empty={!articles.length}
+            emptyMessage={t('news.empty')}
+          >
             <div className="rows">
               {articles.map((article) => (
                 <Link key={article.id} href={href(locale, `/actualites/${article.id}`)} className="row-item">
@@ -42,9 +48,7 @@ export default function NewsPage() {
                 </Link>
               ))}
             </div>
-          ) : (
-            <div className="empty-state">{t('news.empty')}</div>
-          )}
+          </CollectionState>
         </div>
       </section>
     </>

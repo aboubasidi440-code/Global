@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (loading) {
     return (
       <div className="login-wrap">
-        <p style={{ color: 'var(--sand)' }}>Chargement de l’espace d’administration…</p>
+        <p style={{ color: 'var(--muted)' }}>Chargement de l’espace d’administration…</p>
       </div>
     );
   }

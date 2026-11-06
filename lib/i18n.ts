@@ -47,18 +47,23 @@ const fr: Dict = {
   'home.card.write': 'Écrire',
   'home.gallery.title': 'Nos chantiers en images',
   'home.gallery.subtitle':
-    'Quelques chantiers représentatifs de nos métiers. Les fiches projets détaillées seront publiées prochainement.',
+    'Un aperçu visuel de nos domaines d’intervention. Les réalisations détaillées seront publiées prochainement.',
 
   'home.expertise.title': 'Nos domaines d’intervention',
+  'home.expertise.cta': 'Discuter de ce besoin',
   'home.expertise.subtitle':
     'Six expertises complémentaires, mobilisées ensemble sur chaque projet — de l’étude de faisabilité à la réception des ouvrages.',
+  'home.projects.label': 'Sur le terrain',
   'home.projects.title': 'Réalisations',
   'home.projects.subtitle': 'Quelques projets conduits pour des institutions, des collectivités et des entreprises.',
   'home.projects.empty': 'Les premières réalisations seront publiées très prochainement.',
   'home.approach.title': 'Notre approche',
+  'home.approach.heading': 'De l’écoute du besoin à la réception des ouvrages.',
+  'home.approach.image': 'Ingénieurs étudiant des plans sur un chantier',
   'home.approach.subtitle':
     'Une entreprise à taille humaine, ancrée à Niamey, qui associe exigence technique et connaissance fine du terrain.',
   'home.team.title': 'L’équipe',
+  'home.team.heading': 'Des profils complémentaires, engagés sur le terrain.',
   'home.team.subtitle': 'Des profils complémentaires en ingénierie, gestion et logistique.',
   'home.team.link': 'Rencontrer l’équipe',
   'home.contact.title': 'Un projet à étudier, un chantier à conduire ?',
@@ -105,6 +110,7 @@ const fr: Dict = {
   'documents.lead': 'Brochures, références et documents techniques à télécharger.',
   'documents.empty': 'Aucun document disponible pour le moment.',
   'documents.download': 'Télécharger le document',
+  'documents.unavailable': 'Lien indisponible',
 
   'contact.title': 'Contact',
   'contact.lead': 'Écrivez-nous : nous répondons sous deux jours ouvrés.',
@@ -143,6 +149,7 @@ const fr: Dict = {
   'footer.rights': 'Tous droits réservés.',
   'footer.legal': 'Mentions légales',
   'footer.admin': 'Espace d’administration',
+  'footer.top': 'Haut de page',
 
   'common.loading': 'Chargement…',
   'common.error': 'Une erreur est survenue.',
@@ -191,18 +198,23 @@ const en: Dict = {
   'home.card.write': 'Write',
   'home.gallery.title': 'Our work in pictures',
   'home.gallery.subtitle':
-    'A few sites representative of our trades. Detailed case studies will be published shortly.',
+    'A visual overview of our disciplines. Detailed case studies will be published shortly.',
 
   'home.expertise.title': 'What we do',
+  'home.expertise.cta': 'Discuss this need',
   'home.expertise.subtitle':
     'Six complementary disciplines, combined on every project — from feasibility studies to handover.',
+  'home.projects.label': 'In the field',
   'home.projects.title': 'Selected work',
   'home.projects.subtitle': 'Projects delivered for institutions, local authorities and businesses.',
   'home.projects.empty': 'Our first case studies will be published shortly.',
   'home.approach.title': 'How we work',
+  'home.approach.heading': 'From listening to handover.',
+  'home.approach.image': 'Engineers reviewing drawings on a construction site',
   'home.approach.subtitle':
     'A human-sized firm based in Niamey, combining technical rigour with first-hand field knowledge.',
   'home.team.title': 'Our team',
+  'home.team.heading': 'Complementary profiles, committed on the ground.',
   'home.team.subtitle': 'Complementary profiles in engineering, management and logistics.',
   'home.team.link': 'Meet the team',
   'home.contact.title': 'A project to study, a site to deliver?',
@@ -249,6 +261,7 @@ const en: Dict = {
   'documents.lead': 'Brochures, references and technical documents to download.',
   'documents.empty': 'No document available yet.',
   'documents.download': 'Download document',
+  'documents.unavailable': 'Link unavailable',
 
   'contact.title': 'Contact',
   'contact.lead': 'Write to us — we reply within two business days.',
@@ -287,6 +300,7 @@ const en: Dict = {
   'footer.rights': 'All rights reserved.',
   'footer.legal': 'Legal notice',
   'footer.admin': 'Administration',
+  'footer.top': 'Back to top',
 
   'common.loading': 'Loading…',
   'common.error': 'Something went wrong.',
@@ -322,4 +336,10 @@ export function bilingual<T extends Record<string, unknown>>(
 export function href(locale: Locale, path = '') {
   const clean = path.startsWith('/') ? path : `/${path}`;
   return `/${locale}${clean === '/' ? '' : clean}`;
+}
+
+/** Remplace uniquement le segment de langue en conservant la page courante. */
+export function switchLocalePath(pathname: string, target: Locale): string {
+  const path = pathname.replace(/^\/(fr|en)(?=\/|$)/, '');
+  return `/${target}${path}`;
 }

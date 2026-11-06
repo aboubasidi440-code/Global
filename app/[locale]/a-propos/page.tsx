@@ -1,11 +1,14 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import CollectionState from '@/components/CollectionState';
 import { ArrowRight } from '@/components/Icon';
 import { TeamCard } from '@/components/cards';
 import { useTeam } from '@/lib/data';
-import { href, isLocale } from '@/lib/i18n';
+import { href, isLocale, translator } from '@/lib/i18n';
+import fieldImage from '@/public/images/hero-clair.jpg';
 
 const COPY = {
   fr: {
@@ -38,7 +41,7 @@ const COPY = {
         text: 'Quantitatifs détaillés, prix justifiés, avenants documentés : les arbitrages se font à découvert avec le maître d’ouvrage.',
       },
     ],
-    factsLabels: ['à Niamey', 'collaborateurs', 'domaines d’expertise'],
+    factsLabels: ['Créée à Niamey', 'collaborateurs', 'domaines d’expertise'],
     teamTitle: 'L’équipe',
     teamLink: 'Toutes les coordonnées',
     cta: 'Parlons de votre projet',
@@ -73,7 +76,7 @@ const COPY = {
         text: 'Detailed quantities, justified rates, documented variations: trade-offs are made openly with the client.',
       },
     ],
-    factsLabels: ['in Niamey', 'team members', 'areas of expertise'],
+    factsLabels: ['Founded in Niamey', 'team members', 'areas of expertise'],
     teamTitle: 'The team',
     teamLink: 'All contact details',
     cta: 'Let’s talk about your project',
@@ -84,7 +87,8 @@ export default function AboutPage() {
   const params = useParams<{ locale: string }>();
   const locale = isLocale(params?.locale) ? params.locale : 'fr';
   const copy = COPY[locale];
-  const { data: team, loading } = useTeam();
+  const t = translator(locale);
+  const { data: team, loading, error, reload } = useTeam();
 
   return (
     <>
@@ -98,18 +102,22 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="shell split">
-          <div className="story reveal">
+          <div className="story">
             <p>{copy.story1}</p>
             <p>{copy.story2}</p>
             <p>{copy.story3}</p>
           </div>
-          <div className="split-media reveal">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/hero-clair.jpg" alt={locale === 'en' ? 'Our engineers on site' : 'Nos ingénieurs sur le chantier'} />
+          <div className="split-media">
+            <Image
+              src={fieldImage}
+              alt={locale === 'en' ? 'Our engineers on site' : 'Nos ingénieurs sur le chantier'}
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
           </div>
         </div>
 
-        <div className="shell" style={{ marginTop: 'clamp(2.5rem, 4vw, 4rem)' }}>
+        <div className="shell facts-wrap">
           <div className="facts">
             <div>
               <strong>2017</strong>
@@ -127,12 +135,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section" style={{ borderTop: '1px solid var(--line)', background: 'var(--bg-soft)' }}>
+      <section className="section section-soft">
         <div className="shell">
           <div className="activities-head">
-            <div>
-              <span className="eyebrow">{copy.valuesTitle}</span>
-              <h2 style={{ marginTop: '0.8rem', maxWidth: '26ch' }}>{copy.valuesTitle}</h2>
+            <div className="section-intro">
+              <span className="eyebrow">{copy.eyebrow}</span>
+              <h2>{copy.valuesTitle}</h2>
             </div>
           </div>
           <div className="editorial-list">
@@ -150,35 +158,45 @@ export default function AboutPage() {
       <section className="section">
         <div className="shell">
           <div className="activities-head">
-            <div>
+            <div className="section-intro">
               <span className="eyebrow">{copy.teamTitle}</span>
-              <h2 style={{ marginTop: '0.8rem' }}>{copy.teamTitle}</h2>
+              <h2>{copy.teamTitle}</h2>
             </div>
             <Link href={href(locale, '/contact')} className="link-arrow">
               {copy.teamLink} <ArrowRight />
             </Link>
           </div>
 
-          {loading ? (
-            <p className="loading-line">…</p>
-          ) : (
+          <CollectionState
+            locale={locale}
+            loading={loading}
+            error={error}
+            onRetry={reload}
+            empty={!team.length}
+            emptyMessage={t('team.empty')}
+          >
             <div className="team-grid">
               {team.map((member) => (
                 <TeamCard key={member.id} member={member} locale={locale} />
               ))}
             </div>
-          )}
+          </CollectionState>
         </div>
       </section>
 
       <section className="cta-photo">
         <div className="shell cta-photo-inner">
           <div>
+            <span className="eyebrow on-dark">{t('nav.contact')}</span>
             <h2>{copy.cta}</h2>
-            <p>{locale === 'en' ? 'Tell us what you need — we reply within two business days.' : 'Décrivez-nous votre besoin — nous répondons sous deux jours ouvrés.'}</p>
+            <p>
+              {locale === 'en'
+                ? 'Tell us what you need — we reply within two business days.'
+                : 'Décrivez-nous votre besoin — nous répondons sous deux jours ouvrés.'}
+            </p>
           </div>
           <Link href={href(locale, '/contact')} className="btn btn-light">
-            {locale === 'en' ? 'Get in touch' : 'Nous contacter'} <ArrowRight />
+            {t('cta.contact')} <ArrowRight />
           </Link>
         </div>
       </section>
