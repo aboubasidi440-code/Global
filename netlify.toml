@@ -4,6 +4,10 @@
 
 [build]
   command = "npm run build"
+  # Indispensable : plusieurs sites Netlify ont un « publish directory » vide
+  # (= racine du dépôt), ce qui fait échouer @netlify/plugin-nextjs avec
+  # « Your publish directory cannot be the same as the base directory ».
+  publish = ".next"
 
 [build.environment]
   # Next.js 16 exige Node >= 20.9 : on épingle Node 22 pour éviter un build
